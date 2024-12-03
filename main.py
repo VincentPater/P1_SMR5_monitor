@@ -13,9 +13,10 @@ import serial_communication as sc
 
 #  Main
 def main():
-    sc.init_serial_communication()
-    
-    sc.loopcycle_serial_communication()
+    s = sc.init_serial_communication()
+
+    while True:    
+        sc.loopcycle_serial_communication(s)
 
 
 

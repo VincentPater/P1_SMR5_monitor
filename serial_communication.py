@@ -24,11 +24,10 @@ def init_serial_communication(dir_of_serial_port = '/dev/ttyUSB0'):
 
 
 def loopcycle_serial_communication(serialObj):
-    output = " "
-    print("---")
-    while output != "":
-        output = serialObj.readline().decode('ascii')
-        print(output)
+    while serialObj.in_waiting > 0:
+        output = ""
+        output = serialObj.read().decode('ascii')
+        print(output, end="")
 
     
     pass
