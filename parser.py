@@ -31,7 +31,7 @@ def parser_loop(Buffer):
     newBuffer = Buffer[first_EOL_indx+1:]
     
     if printOn:
-        print(textLine, end='')
+        print(textLine)
     
     
         
