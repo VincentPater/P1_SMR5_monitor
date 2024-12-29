@@ -22,12 +22,15 @@ def main():
 
 
     # Loop infinitely until keyboard interrupt
-    while True:    
+    while True:
+        # Read from Serial port into Buffer
         Buffer += sc.loopcycle_serial_communication(s)
         
-        startTime = perf_counter()
+        # Buffer contains no, partial or even multiple text lines -> parse them
         Buffer, textLine = psr.parser_loop(Buffer)
-        print(str(perf_counter()-startTime)+'sec')
+        
+        # Extract info from textlines
+ 
         
         
 

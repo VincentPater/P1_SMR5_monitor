@@ -8,6 +8,7 @@ Created on Sun Dec 29 20:33:04 2024
 from time import perf_counter
 
 
+printOn = True
 
 def parser_loop(Buffer):
 # Parses Buffer, returns Buffer and textline
@@ -18,7 +19,7 @@ def parser_loop(Buffer):
         first_EOL_indx = Buffer.index('\n')
     except:
         #  if no \n found, then no complete line is present -> return None
-        return None
+        return (Buffer, '')
     
         
     
@@ -29,7 +30,8 @@ def parser_loop(Buffer):
     # Keep only the unparsed part of the Buffer
     newBuffer = Buffer[first_EOL_indx+1:]
     
-    print(textLine)
+    if printOn:
+        print(textLine, end='')
     
     
         
