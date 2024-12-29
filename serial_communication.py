@@ -28,7 +28,8 @@ def init_serial_communication(dir_of_serial_port = '/dev/ttyUSB0'):
 
 
 def loopcycle_serial_communication(serialObj):
-    global GlobalBuffer
+    # Empty variable to store characters
+    output = ''
     
     """
     It has been found that often more than 1 char is placed into the serial buffer
@@ -39,9 +40,10 @@ def loopcycle_serial_communication(serialObj):
     # Read one or more characters until serial buffer is empty
     while serialObj.in_waiting > 0:
         # print(serialObj.in_waiting)
-        GlobalBuffer += serialObj.read().decode('ascii')
-        pass
-    
-    return None
+        output += serialObj.read().decode('ascii')
+        
+        
+        
+    return output
     
 

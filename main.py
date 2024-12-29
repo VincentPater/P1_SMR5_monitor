@@ -17,16 +17,17 @@ def main():
     # Initialisation
     s = sc.init_serial_communication()
     
-    GlobalBuffer = ""
+    Buffer = ""
     
 
 
     # Loop infinitely until keyboard interrupt
     while True:    
-        sc.loopcycle_serial_communication(s)
+        Buffer += sc.loopcycle_serial_communication(s)
         
         startTime = perf_counter()
-        psr.parser_loop()
+        Buffer, textLine = psr.parser_loop(Buffer)
+        print(str(perf_counter()-startTime)+'sec')
         
         
 

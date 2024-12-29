@@ -9,14 +9,13 @@ from time import perf_counter
 
 
 
-def parser_loop():
-    global GlobalBuffer
-    global startTime
+def parser_loop(Buffer):
+# Parses Buffer, returns Buffer and textline
+   
     
-    
-    # find first '\n' in GlobalBuffer
+    # find first '\n' in Buffer
     try:
-        first_EOL_indx = GlobalBuffer.index('\n')
+        first_EOL_indx = Buffer.index('\n')
     except:
         #  if no \n found, then no complete line is present -> return None
         return None
@@ -25,14 +24,13 @@ def parser_loop():
     
     # if a the first (not necesarily the only) '\n' has been found:
     # place everything up-to and including it into a new variable
-    textLine = GlobalBuffer[0:first_EOL_indx]
+    textLine = Buffer[0:first_EOL_indx]
     
-    # Keep only the unparsed part of the GlobalBuffer
-    GlobalBuffer = GlobalBuffer[first_EOL_indx+1:]
+    # Keep only the unparsed part of the Buffer
+    newBuffer = Buffer[first_EOL_indx+1:]
     
     print(textLine)
-    print(str(perf_counter()-startTime))
     
     
-    
-    return None
+        
+    return (newBuffer, textLine)
