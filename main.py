@@ -7,22 +7,41 @@ Created on Tue Dec  3 22:11:03 2024
 
 # Import Modules
 import serial_communication as sc
+import parser as psr
+
+from time import perf_counter
 
 
-
-
-#  Main
+#%%                 --- Main ---
 def main():
+    # Initialisation
     s = sc.init_serial_communication()
     
-    startTime = perf_counter()
+    GlobalBuffer = ""
     
 
+
+    # Loop infinitely until keyboard interrupt
     while True:    
         sc.loopcycle_serial_communication(s)
+        
+        startTime = perf_counter()
+        psr.parser_loop()
+        
+        
 
 
 
+
+
+
+
+
+
+
+
+
+# %%                --- Setup so program runs ---
 
 
 if __name__ == "__main__":

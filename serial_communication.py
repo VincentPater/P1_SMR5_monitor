@@ -28,17 +28,20 @@ def init_serial_communication(dir_of_serial_port = '/dev/ttyUSB0'):
 
 
 def loopcycle_serial_communication(serialObj):
-    output = ""
-    startTime = perf_counter()
+    global GlobalBuffer
+    
+    """
+    It has been found that often more than 1 char is placed into the serial buffer
+    yet not necessarily the entire line. 40 - 60 but also 5 have been observed
+    Sometimes also MORE than one message is included
+    """
+    
     # Read one or more characters until serial buffer is empty
     while serialObj.in_waiting > 0:
-        print(serialObj.in_waiting)
-        output += serialObj.read().decode('ascii')
+        # print(serialObj.in_waiting)
+        GlobalBuffer += serialObj.read().decode('ascii')
         pass
     
-    # The variable output should now be added to the line-buffer
-    print(output)
-    print(str(perf_counter()-startTime)+'sec')
-    
+    return None
     
 
