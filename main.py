@@ -7,7 +7,7 @@ Created on Tue Dec  3 22:11:03 2024
 
 # Import Modules
 import serial_communication as sc
-from time import perf_counter
+
 
 
 
@@ -19,13 +19,7 @@ def main():
     
 
     while True:    
-        char = sc.loopcycle_serial_communication(s)
-        print(char)
-        if char == '\n':
-            print(perf_counter()-startTime)
-            pass
-        
-        
+        sc.loopcycle_serial_communication(s)
 
 
 
