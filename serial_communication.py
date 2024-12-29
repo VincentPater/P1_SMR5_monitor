@@ -8,6 +8,8 @@ import serial
 import string
 
 
+
+
 def init_serial_communication(dir_of_serial_port = '/dev/ttyUSB0'):    
     baudrate = 115200
     bytesize = 8
@@ -15,6 +17,7 @@ def init_serial_communication(dir_of_serial_port = '/dev/ttyUSB0'):
     stopbits = 1
     stoptime = 1 # seconds
     serialObj   = serial.Serial(dir_of_serial_port, baudrate, bytesize, parity, stopbits, timeout=stoptime)
+
     
     return serialObj
 
@@ -24,10 +27,10 @@ def init_serial_communication(dir_of_serial_port = '/dev/ttyUSB0'):
 
 
 def loopcycle_serial_communication(serialObj):
-    while serialObj.in_waiting > 0:
-        output = ""
-        output = serialObj.read().decode('ascii')
-        print(output, end="")
-
+    output = ""
     
-    pass
+    while serialObj.in_waiting > 0:
+        output += serialObj.read().decode('ascii')
+        pass
+    
+    return output

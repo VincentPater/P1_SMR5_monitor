@@ -7,27 +7,25 @@ Created on Tue Dec  3 22:11:03 2024
 
 # Import Modules
 import serial_communication as sc
-
+from time import perf_counter
 
 
 
 #  Main
 def main():
     s = sc.init_serial_communication()
+    
+    startTime = perf_counter()
+    
 
     while True:    
-        sc.loopcycle_serial_communication(s)
-
-
-
-
-
-
-
-
-
-
-
+        char = sc.loopcycle_serial_communication(s)
+        print(char)
+        if char == '\n':
+            print(perf_counter()-startTime)
+            pass
+        
+        
 
 
 
@@ -35,3 +33,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
