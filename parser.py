@@ -8,9 +8,9 @@ Created on Sun Dec 29 20:33:04 2024
 from time import perf_counter
 
 
-printOn = True
+# printOn = True
 
-def parser_loop(Buffer):
+def parser_loop(Buffer, printOn):
 # Parses Buffer, returns Buffer and textline
    
     
