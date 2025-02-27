@@ -67,11 +67,14 @@ class CurrentSmartMeterValues:
 
     def interpretLine (self, textLine):
         
+        if len(textLine) == 0:      # Blank textline
+            return
+        
         # Start or end of telegram -> Ignore
-        if textLine[0] == '\\':     # start of header is a '\', need extra for escape char
+        if textLine.find('/') >= 0:     # start of header is a '\', need extra for escape char
             print('Header')
             return
-        if textLine[0] == '!':      # end of telegram starts with '!'
+        if textLine.find('!') >= 0:      # end of telegram starts with '!'
             print('End of telegram')
             return
         

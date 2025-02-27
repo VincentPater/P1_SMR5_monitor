@@ -21,8 +21,8 @@ def parser_loop(Buffer, printOn):
         
     
     # if a the first (not necesarily the only) '\n' has been found:
-    # place everything up-to and including it into a new variable
-    textLine = Buffer[0:first_EOL_indx]
+    # place everything up-to but excluding all eol's into a new variable
+    textLine = Buffer[0:first_EOL_indx].rstrip()
     
     # Keep only the unparsed part of the Buffer
     newBuffer = Buffer[first_EOL_indx+1:]

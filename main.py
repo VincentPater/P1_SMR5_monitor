@@ -29,7 +29,7 @@ def main():
     # Initialisation
     s = sc.init_serial_communication(ttydir)
     Buffer = ""
-    currentMeterValues = CurrentSmartMeterValues.__init__()
+    currentMeterValues = CurrentSmartMeterValues()
     oldTime = time()
     
 
@@ -46,7 +46,7 @@ def main():
         
         # Temp: print values in obj
         curTime = time()
-        if (curTime - oldTime) >= 3:
+        if (curTime - oldTime) >= 2:
             print(currentMeterValues.date)
             print(currentMeterValues.time)
             print(currentMeterValues.meterUsedT1)
