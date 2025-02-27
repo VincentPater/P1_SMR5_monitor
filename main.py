@@ -9,8 +9,9 @@ Created on Tue Dec  3 22:11:03 2024
 import configparser
 import serial_communication as sc
 import parser as psr
+from interpreter import CurrentSmartMeterValues
 
-from time import perf_counter
+from time import time
 
 
 #%%                 --- Main ---
@@ -28,6 +29,8 @@ def main():
     # Initialisation
     s = sc.init_serial_communication(ttydir)
     Buffer = ""
+    currentMeterValues = CurrentSmartMeterValues.__init__()
+    oldTime = time()
     
 
     # Loop infinitely until keyboard interrupt
@@ -39,8 +42,23 @@ def main():
         Buffer, textLine = psr.parser_loop(Buffer, printOn)
         
         # Extract info from textlines
- 
+        currentMeterValues.interpretLine(textLine)
         
+        # Temp: print values in obj
+        curTime = time()
+        if (curTime - oldTime) >= 3:
+            print(currentMeterValues.date)
+            print(currentMeterValues.time)
+            print(currentMeterValues.meterUsedT1)
+            print(currentMeterValues.meterUsedT2)
+            print(currentMeterValues.meterReturnedT1)
+            print(currentMeterValues.meterReturnedT2)
+            print(currentMeterValues.tariffIndicator)
+            print(currentMeterValues.powerUsed)
+            print(currentMeterValues.powerReturned)
+            print(currentMeterValues.meterM1reading)
+            print(currentMeterValues.meterM2reading)
+            oldTime = curTime
         
 
 

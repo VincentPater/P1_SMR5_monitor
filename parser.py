@@ -5,9 +5,6 @@ Created on Sun Dec 29 20:33:04 2024
 @author: Vincent
 """
 
-from time import perf_counter
-
-
 # printOn = True
 
 def parser_loop(Buffer, printOn):
