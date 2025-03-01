@@ -70,82 +70,77 @@ class CurrentSmartMeterValues:
         if len(textLine) == 0:      # Blank textline
             return
         
+        
         # Start or end of telegram -> Ignore
         if textLine.find('/') >= 0:     # start of header is a '\', need extra for escape char
-            print('Header')
+            # print('Header')
             return
         if textLine.find('!') >= 0:      # end of telegram starts with '!'
-            print('End of telegram')
+            # print('End of telegram')
             return
         
+        
+        
+        textLineList = textLine.replace('(', ' ').replace(')', ' ').replace('*', ' ').split()
+        
         # Update Date and Time
-        if textLine.find(allCodes["Date-Time"]) >= 0:
-            indx = len(allCodes["Date-Time"])+1
-            self.date = '20' + textLine[indx:indx+2] + '-' + textLine[indx+2:indx+4] + '-' + textLine[indx+4:indx+6]
+        if textLineList[0] == allCodes["Date-Time"]:
+            self.date = '20' + textLineList[1][:2] + '-' + textLineList[1][2:4] + '-' + textLineList[1][4:6]
             
-            if textLine[-2] == 'W':
-                self.time = textLine[indx+6:indx+8] + ':' + textLine[indx+8:indx+10] + ':' + textLine[indx+10:indx+12] + ' UTC+1'
-            elif textLine[-2] == 'S':
-                self.time = textLine[indx+6:indx+8] + ':' + textLine[indx+8:indx+10] + ':' + textLine[indx+10:indx+12] + ' UTC+2'
+            if textLineList[1][-1] == 'W':
+                self.time = textLineList[1][6:8] + ':' + textLineList[1][8:10] + ':' + textLineList[1][10:12] + ' UTC+1'
+            elif textLineList[1][-1] == 'S':
+                self.time = textLineList[1][6:8] + ':' + textLineList[1][8:10] + ':' + textLineList[1][10:12] + ' UTC+2'
             else:
-                self.time = textLine[indx+6:-1]
+                self.time = textLineList[1][6:-1] # Should never happen
             return
           
             
           
             
         # Update meterUsedT1
-        if textLine.find(allCodes["Meter Reading Used Tariff 1"]) >= 0:
-            indx = len(allCodes["Meter Reading Used Tariff 1"])+1
-            self.meterUsedT1 = textLine[indx:-1]
+        if textLineList[0] == allCodes["Meter Reading Used Tariff 1"]:
+            self.meterUsedT1 = textLineList[1]
             return
         
         # Update meterUsedT2
-        if textLine.find(allCodes["Meter Reading Used Tariff 2"]) >= 0:
-            indx = len(allCodes["Meter Reading Used Tariff 2"])+1
-            self.meterUsedT2 = textLine[indx:-1]      
+        if textLineList[0] == allCodes["Meter Reading Used Tariff 2"]:
+            self.meterUsedT2 = textLineList[1]     
             return
             
         # Updaye meterReturnedT1
-        if textLine.find(allCodes["Meter Reading Returned Tariff 1"]) >= 0:
-            indx = len(allCodes["Meter Reading Returned Tariff 1"])+1
-            self.meterReturnedT1 = textLine[indx:-1] 
+        if textLineList[0] == allCodes["Meter Reading Returned Tariff 1"]:
+            self.meterReturnedT1 = textLineList[1] 
             return
         
         # Update meterReturnedT2
-        if textLine.find(allCodes["Meter Reading Returned Tariff 2"]) >= 0:
-            indx = len(allCodes["Meter Reading Returned Tariff 2"])+1
-            self.meterReturnedT2 = textLine[indx:-1]
+        if textLineList[0] == allCodes["Meter Reading Returned Tariff 2"]:
+            self.meterReturnedT2 = textLineList[1]
             return
             
         # Update tariffIndicator
-        if textLine.find(allCodes["Tariff indicator electricity"]) >= 0:
-            indx = len(allCodes["Tariff indicator electricity"])+1
-            self.tariffIndicator = int(textLine[indx:-1])
+        if textLineList[0] == allCodes["Tariff indicator electricity"]:
+            self.tariffIndicator = int(textLineList[1])
             return
             
         # Update powerUsed
-        if textLine.find(allCodes["Power Used +P"]) >= 0:
-            indx = len(allCodes["Power Used +P"])+1
-            self.powerUsed = textLine[indx:-1]     
+        if textLineList[0] == allCodes["Power Used +P"]:
+            self.powerUsed = textLineList[1] 
             return
         
         # Update powerReturned
-        if textLine.find(allCodes["Power Returned -P"]) >= 0:
-            indx = len(allCodes["Power Returned -P"])+1
-            self.powerReturned = textLine[indx:-1]     
+        if textLineList[0] == allCodes["Power Returned -P"]:
+            self.powerReturned = textLineList[1]    
             return  
         
         # Update meter 1 (Gas probably)
-        if textLine.find(allCodes["Meter 1 Last reading"]) >= 0:
-            indx = len(allCodes["Meter 1 Last reading"])+1
-            self.meterM1reading = textLine[indx:-1]     
+        if textLineList[0] == allCodes["Meter 1 Last reading"]:
+            self.meterM1reading = textLineList[1]    
             return          
         
         # Update meter 2 (Water probably)
-        if textLine.find(allCodes["Meter 2 Last reading"]) >= 0:
-            indx = len(allCodes["Meter 2 Last reading"])+1
-            self.meterM2reading = textLine[indx:-1]     
+        if textLineList[0] == allCodes["Meter 2 Last reading"]:
+            self.meterM2reading = textLineList[1]    
             return              
         
         return
