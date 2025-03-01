@@ -133,14 +133,14 @@ class CurrentSmartMeterValues:
             self.powerReturned = textLineList[1]    
             return  
         
-        # Update meter 1 (Gas probably)
+        # Update meter 1
         if textLineList[0] == allCodes["Meter 1 Last reading"]:
-            self.meterM1reading = textLineList[1]    
+            self.meterM1reading = 'time: '+ textLineList[1] + ' reading: ' + textLineList[2] + ' ' + textLineList[3]      
             return          
         
-        # Update meter 2 (Water probably)
+        # Update meter 2
         if textLineList[0] == allCodes["Meter 2 Last reading"]:
-            self.meterM2reading = textLineList[1]    
+            self.meterM2reading = 'time: '+ textLineList[1] + ' reading: ' + textLineList[2] + ' ' + textLineList[3]     
             return              
         
         return

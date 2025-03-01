@@ -47,6 +47,7 @@ def main():
         # Temp: print values in obj
         curTime = time()
         if (curTime - oldTime) >= 2:
+            print('----------')
             print(currentMeterValues.date)
             print(currentMeterValues.time)
             print(currentMeterValues.meterUsedT1)
@@ -58,6 +59,8 @@ def main():
             print(currentMeterValues.powerReturned)
             print(currentMeterValues.meterM1reading)
             print(currentMeterValues.meterM2reading)
+            print('----------')
+            print('')
             oldTime = curTime
         
 
