@@ -1,3 +1,8 @@
+# Update
+Project halted in favor of ESP32 -> MQTT -> (e.g. HomeAssistent) solution.
+I'll leave this public in case anybody wants to continue.
+
+
 # P1_SMR5_monitor
 
 Done:
@@ -10,8 +15,9 @@ Done:
 
 Todo:
 
-6. Show data via local web page
-7. Archival of data every day
+6. CRC implementation (similar to https://gathering.tweakers.net/forum/list_messages/2250716)
+7. Show data via local web page
+8. Archival of data every day
 
 Future Features:
 - Log energy use and production per day/week/month?
